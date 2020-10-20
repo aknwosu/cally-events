@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState} from 'react';
+import GoogleAuth from './Authorization/GoogleAuth'
 
 function App() {
+  const [calendars, setCalendars] = useState({});
+  const [colourToSummary, setColourToSummary] = useState({})
+
   return (
     <div className="App">
-      Empty
+      <GoogleAuth
+        setCalendars={setCalendars}
+      />
     </div>
   );
 }
