@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import GoogleAuth from './Authorization/GoogleAuth'
-
+import Calendar from './Calendar'
 function App() {
   const [calendars, setCalendars] = useState({});
   const [colorToSummary, setColorToSummary] = useState({})
@@ -11,7 +11,8 @@ function App() {
         setColorToSummary={setColorToSummary}
         setCalendars={setCalendars}
       />
-      {console.log(calendars, colorToSummary)}
+
+      <Calendar calendars={calendars} colorToSummary={colorToSummary} />
     </div>
   );
 }

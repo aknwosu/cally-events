@@ -24,7 +24,6 @@ function initClient() {
 		discoveryDocs: DISCOVERY_DOCS,
 		scope: SCOPES
 	}).then(() => {
-		// console.log(gapi.auth2.getAuthInstance())
 		// Listen for sign-in state changes.
 		gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus.bind({ setCalendars, setIsSignedIn, setColorToSummary }));
 
