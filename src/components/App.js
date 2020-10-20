@@ -3,15 +3,15 @@ import GoogleAuth from './Authorization/GoogleAuth'
 
 function App() {
   const [calendars, setCalendars] = useState({});
-  const [colourToSummary, setColourToSummary] = useState({})
+  const [colorToSummary, setColorToSummary] = useState({})
 
   return (
     <div className="App">
       <GoogleAuth
-        setColourToSummary={setColourToSummary}
+        setColorToSummary={setColorToSummary}
         setCalendars={setCalendars}
       />
-      {console.log(calendars)}
+      {console.log(calendars, colorToSummary)}
     </div>
   );
 }
