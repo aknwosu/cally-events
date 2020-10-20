@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DISCOVERY_DOCS, SCOPES, startOfWeek, endOfWeek } from '../../constants'
+import Dayjs from 'dayjs'
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const API_KEY = process.env.REACT_APP_API_KEY;
 const gapi = window.gapi;
@@ -56,7 +57,25 @@ function listUpcomingEvents(calendarId = 'primary', summary, setCalendars) {
 		window.calendarEvents = response.result.items
 
 		window.calendars[summary] = events
-		setCalendars((prevState) => ({ ...prevState }));
+		const transformed = events.reduce((result, event) => {
+			const when = Dayjs(event.start.dateTime || event.start.date) // a.utc().format() datejs timezone to UTC this
+			const endTime = Dayjs(event.end.dateTime || event.end.date)
+
+			const whenFormatted = when.format('YYYY-MM-DD[T]HH');
+			const duration = endTime.diff(when, 'minutes')
+			const offset = when.get('minute')
+			if (!result.hasOwnProperty(whenFormatted)) {
+				result[whenFormatted] = []
+			}
+			result[whenFormatted].push({
+				...event,
+				calendarSummary: summary,
+				duration,
+				offset
+			})
+			return result;
+		}, {})
+		setCalendars((prevState) => ({ ...prevState, transformed }));
 
 
 	});

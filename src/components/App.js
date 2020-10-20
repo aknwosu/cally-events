@@ -8,8 +8,10 @@ function App() {
   return (
     <div className="App">
       <GoogleAuth
+        setColourToSummary={setColourToSummary}
         setCalendars={setCalendars}
       />
+      {console.log(calendars)}
     </div>
   );
 }
