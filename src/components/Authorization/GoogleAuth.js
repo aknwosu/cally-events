@@ -30,7 +30,7 @@ function initClient() {
 		// Handle the initial sign-in state.
 		updateSigninStatus.bind({ setCalendars, setIsSignedIn, setColorToSummary })(gapi.auth2.getAuthInstance().isSignedIn.get());
 	}, function (error) {
-		console.log(error)
+		console.error(error)
 	});
 }
 
@@ -46,7 +46,7 @@ function updateSigninStatus(isSignedIn) {
 	}
 }
 
-function listUpcomingEvents(calendarId = 'primary', summary, setCalendars) {
+function listUpcomingEvents(calendarId = 'Primary', summary, setCalendars) {
 	gapi.client.calendar.events.list({
 		'calendarId': calendarId,
 		'showDeleted': false,
@@ -93,11 +93,11 @@ const getUsersCalendarList = async (setCalendars, setColorToSummary) => {
 		var calendarList = response.result.items;
 
 		for (let i = 0; i < calendarList.length; ++i) { // don't use a forEach
-			const summary = calendarList[i].primary ? 'primary' : calendarList[i].summary
+			const summary = calendarList[i].primary ? 'Primary' : calendarList[i].summary
 			setColorToSummary(prevState => ({
 				...prevState,
 				[summary]: Object.keys(prevState).length < COLOR_MAP.length ? COLOR_MAP[Object.keys(prevState).length] : `#${(Math.random() * 0xffffff).toString(16).slice(-6)}`,
-				primary: COLOR_MAP[0]
+				Primary: "#2da79b"
 			}))
 			await listUpcomingEvents(calendarList[i].id, summary, setCalendars)
 		}

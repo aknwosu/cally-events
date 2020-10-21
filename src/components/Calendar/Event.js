@@ -32,10 +32,9 @@ const EventCard = ({ gridEvent = [], colorToSummary = {}, hiddenCalendars }) => 
 							summary={ev.calendarSummary}
 							hidden={hiddenCalendars[ev.calendarSummary]}
 						>
-							<div>
-								{ev.summary}
-								<div>{Dayjs(ev.start.dateTime || ev.start.date).format('h')}{ev.end.dateTime && `- ${Dayjs(ev.end.dateTime).format('ha')}`} </div>
-
+							<div style={{ padding: '8px', fontSize: '13px' }}>
+								{ev.summary || 'Untitled'}
+								<div>{ev.start.dateTime && `${Dayjs(ev.start.dateTime).format('h:m')} - ${Dayjs(ev.end.dateTime).format('h:mma')}`} </div>
 							</div>
 						</EventOverlay>
 					)
