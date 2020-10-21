@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/cally-events/static/css/main.c26464eb.chunk.css",
+    "main.js": "/cally-events/static/js/main.3c508f55.chunk.js",
+    "main.js.map": "/cally-events/static/js/main.3c508f55.chunk.js.map",
+    "runtime-main.js": "/cally-events/static/js/runtime-main.0814dbd9.js",
+    "runtime-main.js.map": "/cally-events/static/js/runtime-main.0814dbd9.js.map",
+    "static/js/2.daff5a76.chunk.js": "/cally-events/static/js/2.daff5a76.chunk.js",
+    "static/js/2.daff5a76.chunk.js.map": "/cally-events/static/js/2.daff5a76.chunk.js.map",
+    "index.html": "/cally-events/index.html",
+    "precache-manifest.6a4b7e7cbf46f5238fb37625230f8db5.js": "/cally-events/precache-manifest.6a4b7e7cbf46f5238fb37625230f8db5.js",
+    "service-worker.js": "/cally-events/service-worker.js",
+    "static/css/main.c26464eb.chunk.css.map": "/cally-events/static/css/main.c26464eb.chunk.css.map",
+    "static/js/2.daff5a76.chunk.js.LICENSE.txt": "/cally-events/static/js/2.daff5a76.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0814dbd9.js",
+    "static/js/2.daff5a76.chunk.js",
+    "static/css/main.c26464eb.chunk.css",
+    "static/js/main.3c508f55.chunk.js"
+  ]
+}
