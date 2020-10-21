@@ -20,7 +20,7 @@ const Calendar = ({ calendars, colorToSummary }) => {
 	}
 	const startOfWeek = Dayjs().startOf('week');
 
-	const renderGrid = React.useCallback(() => {
+	const renderGrid = () => {
 		const grid = [];
 		for (let hdx = 0; hdx < 24; hdx++) {
 			grid.push([]);
@@ -30,7 +30,8 @@ const Calendar = ({ calendars, colorToSummary }) => {
 			}
 		}
 		return grid
-	}, []);
+	};
+
 	if (!calendars) return <div>Loading...</div>
 	return (
 		<Container>
