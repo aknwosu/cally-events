@@ -1,13 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import EventCard from './Event'
 import Dayjs from 'dayjs';
+import styled from 'styled-components'
+
 import updateLocale from 'dayjs/plugin/updateLocale';
 Dayjs.extend(updateLocale)
 
-const Calendar = ({ calendars, colorToSummary }) => {
-	console.log(calendars, colorToSummary)
-	const weekDays = Dayjs.updateLocale('en').weekdays
+const SplitSection = styled.div`
+	display: flex;
+`
+const AsideSection = styled.div`
+	flex-basis: 20%;
+	padding-top: 3rem;
+`
+const Table = styled.table`
+	border-collapse: collapse;
+	display: block;
+`
+const Tbody = styled.tbody`
+	height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: block;
+    width: 100%;
+`
 
+const Calendar = ({ calendars, colorToSummary }) => {
+	const [hiddenCalendars, setHiddenCalendars] = useState({})
+
+	const weekDays = Dayjs.updateLocale('en').weekdays
+	
+	const setHiddenCalendarsHandler = (summary) => {
+		setHiddenCalendars({...hiddenCalendars, [summary]: !hiddenCalendars[summary]})
+	}
 	const renderGrid = React.useCallback(() => {
 		const startOfWeek = Dayjs().startOf('week');
 		const grid = [];
@@ -20,44 +45,45 @@ const Calendar = ({ calendars, colorToSummary }) => {
 		}
 		return grid
 	}, []);
-
+	if (!calendars) return <div>Loading...</div>
 	return (
-		<div>
-			<aside>
+		<SplitSection>
+			<AsideSection>
 				{Object.keys(colorToSummary).map(summaryItem => (
-					<div key={summaryItem}>
+					<div key={summaryItem} onClick={() => setHiddenCalendarsHandler(summaryItem)}>
 						{summaryItem}
 					</div>
 				))}
-			</aside>
+			</AsideSection>
 			<div>
-				<table>
+				<Table>
 					<thead>
 						<tr>
 							<th></th>
 							{weekDays.map(weekDay => <th key={weekDay}>{weekDay}</th>)}
 						</tr>
 					</thead>
-					<tbody>
+					<Tbody>
 						{
 							renderGrid().map((row, i) => {
 								return (
 									<tr key={`${row}${i}`}>
-										{row.map(hour => <EventCard
+										{row.map(hour => {
+										return <EventCard
 											key={hour}
 											gridEvent={calendars[hour]}
 											colorToSummary={colorToSummary}
-										/>
+											hiddenCalendars={hiddenCalendars}
+										/>}
 										)}
 									</tr>
 								)
 							})
 						}
-					</tbody>
-				</table>
+					</Tbody>
+				</Table>
 			</div>
-			Calendar table
-		</div>
+		</SplitSection>
 	)
 }
 

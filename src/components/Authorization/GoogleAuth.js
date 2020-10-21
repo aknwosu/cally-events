@@ -77,7 +77,7 @@ function listUpcomingEvents(calendarId = 'primary', summary, setCalendars) {
 			})
 			return result;
 		}, {})
-		setCalendars((prevState) => ({ ...prevState, transformed }));
+		setCalendars((prevState) => ({ ...prevState, ...transformed }));
 
 
 	});
