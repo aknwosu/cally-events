@@ -20,6 +20,7 @@ const Calendar = ({ calendars = {}, colorToSummary }) => {
 	}
 	const startOfWeek = Dayjs().startOf('week');
 
+	// Render a 7 x 23 grid of dates representing hours and days of the week
 	const renderGrid = () => {
 		const grid = [];
 		for (let hdx = 0; hdx < 24; hdx++) {

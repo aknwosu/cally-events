@@ -9,11 +9,11 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 window.calendars = {}
 
-
 function handleClientLoad({ setCalendars, setIsSignedIn, setColorToSummary }) {
 	gapi.load('client:auth2', initClient.bind({ setCalendars, setIsSignedIn, setColorToSummary }));
 }
 
+// Initialize gapi
 function initClient() {
 	const setCalendars = this.setCalendars;
 	const setIsSignedIn = this.setIsSignedIn;
@@ -61,7 +61,7 @@ function listUpcomingEvents(calendarId = 'Primary', summary, setCalendars) {
 
 		window.calendars[summary] = events
 		const transformed = events.reduce((result, event) => {
-			const when = Dayjs(event.start.dateTime || event.start.date) // a.utc().format() datejs timezone to UTC this
+			const when = Dayjs(event.start.dateTime || event.start.date)
 			const endTime = Dayjs(event.end.dateTime || event.end.date)
 
 			const whenFormatted = when.format('YYYY-MM-DD[T]HH');
@@ -91,7 +91,7 @@ const getUsersCalendarList = async (setCalendars, setColorToSummary) => {
 		'orderBy': 'startTime',
 	}).then(async (response) => {
 		var calendarList = response.result.items;
-		for (let i = 0; i < calendarList.length; ++i) { // don't use a forEach
+		for (let i = 0; i < calendarList.length; ++i) {
 			const summary = calendarList[i].primary ? 'Primary' : calendarList[i].summary
 			setColorToSummary(prevState => ({
 				...prevState,
