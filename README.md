@@ -14,7 +14,7 @@ git clone git@github.com:aknwosu/cally-events.git && cd cally-events
 ```bash
  touch .env
 ```
-Youll need the env files from me or create them in google. Paste this in the .env file similar to the keys is in the .env.example
+You'll need the env files from me or create them in google. Paste this in the .env file similar to the keys in the .env.example
 
 ```bash
 npm install
