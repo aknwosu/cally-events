@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { DISCOVERY_DOCS, SCOPES, COLOR_MAP, startOfWeek, endOfWeek } from '../../constants'
+import { DISCOVERY_DOCS, SCOPES, startOfWeek, endOfWeek } from '../../constants'
 import SignIn from './SignIn'
 import SignOut from './SignOut'
 import Dayjs from 'dayjs'
+import {gapi} from './gapi'
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const API_KEY = process.env.REACT_APP_API_KEY;
-const gapi = window.gapi;
+
 window.calendars = {}
 
 
@@ -85,19 +86,16 @@ function listUpcomingEvents(calendarId = 'Primary', summary, setCalendars) {
 
 const getUsersCalendarList = async (setCalendars, setColorToSummary) => {
 	gapi.client.calendar.calendarList.list({
-		// 'timeMin': (new Date()).toISOString(),
 		'showDeleted': false,
 		'singleEvents': true,
 		'orderBy': 'startTime',
 	}).then(async (response) => {
 		var calendarList = response.result.items;
-
 		for (let i = 0; i < calendarList.length; ++i) { // don't use a forEach
 			const summary = calendarList[i].primary ? 'Primary' : calendarList[i].summary
 			setColorToSummary(prevState => ({
 				...prevState,
-				[summary]: Object.keys(prevState).length < COLOR_MAP.length ? COLOR_MAP[Object.keys(prevState).length] : `#${(Math.random() * 0xffffff).toString(16).slice(-6)}`,
-				Primary: "#2da79b"
+				[summary]: calendarList[i].backgroundColor,
 			}))
 			await listUpcomingEvents(calendarList[i].id, summary, setCalendars)
 		}

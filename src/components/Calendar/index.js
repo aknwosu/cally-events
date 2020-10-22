@@ -10,7 +10,7 @@ Dayjs.extend(isToday)
 
 Dayjs.extend(updateLocale)
 
-const Calendar = ({ calendars, colorToSummary }) => {
+const Calendar = ({ calendars = {}, colorToSummary }) => {
 	const [hiddenCalendars, setHiddenCalendars] = useState({})
 
 	const weekDays = Dayjs.updateLocale('en').weekdays
@@ -31,8 +31,6 @@ const Calendar = ({ calendars, colorToSummary }) => {
 		}
 		return grid
 	};
-
-	if (!calendars) return <div>Loading...</div>
 	return (
 		<Container>
 			<Heading>{Dayjs(startOfWeek).format('MMMM, YYYY')}</Heading>
